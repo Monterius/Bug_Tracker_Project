@@ -20,11 +20,16 @@ namespace Bug_Tracker_Project.Models
 
         public DateTime TimeOfCreation { get; }
 
+        // Only for testing
+        public string Results { get; }
+
         public Task(User user)
         {
             Submitter = user;
             TimeOfCreation = DateTime.Now;
         }
+
+        public Task(string results) => Results = results;
 
         public Task() {}
     }

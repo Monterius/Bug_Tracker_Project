@@ -7,17 +7,11 @@ using Bug_Tracker_Project.Models;
 
 namespace Bug_Tracker_Project.Controllers
 {
-    public class HomeController : Controller
+    public class TaskController : Controller
     {
-        public ActionResult Index()
+        // GET: Task
+        public ActionResult Index(Task task=null)
         {
-            return View();
-        }
-
-        public ActionResult About(Task task = null)
-        {
-            ViewBag.Message = "Your application description page.";
-
             if (task == null) return View("About", new Task());
 
             var results = task.Title + "\n" + task.Description;
@@ -25,13 +19,6 @@ namespace Bug_Tracker_Project.Controllers
 
             var finalTask = new Task(resultsHtml);
             return View("About", finalTask);
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
         }
     }
 }
