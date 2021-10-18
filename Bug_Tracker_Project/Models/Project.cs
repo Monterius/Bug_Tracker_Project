@@ -19,6 +19,11 @@ namespace Bug_Tracker_Project.Models
 
         public List<User> MembersOfProject;
 
+        // Only for testing
+        public string Results { get; }
+
+        public Project(string results) => Results = results;
+
         public Project() {}
     }
 }

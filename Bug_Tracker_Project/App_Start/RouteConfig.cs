@@ -31,6 +31,12 @@ namespace Bug_Tracker_Project
                 defaults: new { controller = "Task", action = "Index", id = UrlParameter.Optional }
             );
 
+            routes.MapRoute(
+                name: "Project",
+                url: "{controller}/{Project}",
+                defaults: new { controller = "Project", action = "Index", id = UrlParameter.Optional }
+            );
+
             //routes.MapMvcAttributeRoutes();
         }
     }

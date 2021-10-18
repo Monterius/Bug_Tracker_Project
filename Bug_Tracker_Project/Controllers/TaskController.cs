@@ -9,7 +9,7 @@ namespace Bug_Tracker_Project.Controllers
 {
     public class TaskController : Controller
     {
-        // GET: Task
+        // Not being used atm
         public ActionResult Index(Task task=null)
         {
             if (task == null) return View("About", new Task());
