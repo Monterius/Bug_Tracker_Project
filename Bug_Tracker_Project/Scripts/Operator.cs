@@ -92,7 +92,7 @@ namespace Bug_Tracker_Project.Scripts
             // customize connection string for your particular settings
             // Note the default port is 3306 but I chose 6000 because 3306 was not open on my machine.
             String connString =
-                "database = bugTrackerFlynt; server = localhost; user id = root; pwd = D@nkm3m3s; Port = 6000";
+                "database = bugTrackerFlynt; server = localhost; user id = root; pwd =; Port = 6000";
             MySqlConnection con = new MySqlConnection(connString);
             con.Open();
             return con;
