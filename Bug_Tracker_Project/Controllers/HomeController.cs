@@ -14,7 +14,7 @@ namespace Bug_Tracker_Project.Controllers
             return View();
         }
 
-        public ActionResult About(Task task = null)
+        public ActionResult About(Task task = null, Project project = null)
         {
             ViewBag.Message = "Your application description page.";
 
