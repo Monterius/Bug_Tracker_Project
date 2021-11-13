@@ -17,15 +17,15 @@ namespace Bug_Tracker_Project.Scripts
         /// and if unsuccessful returns false Only use if you know the 
         /// database exists prior to calling
         /// </returns>
-        public static async Task<bool> DbRetrieval(string query) {
+        public static async Task<bool> ExecuteDbQuery(string query) {
 
+            bool result = true;
             MySqlConnection con = null;
             MySqlDataReader sqlRd = null;
-            bool result = true;
-
+            
             try
             {
-                con = await ConnectToDb();
+                con = ConnectToDb().Result;
                 MySqlCommand cmd = new MySqlCommand(query, con);
                 sqlRd = cmd.ExecuteReader();
             }
@@ -92,7 +92,7 @@ namespace Bug_Tracker_Project.Scripts
             // customize connection string for your particular settings
             // Note the default port is 3306 but I chose 6000 because 3306 was not open on my machine.
             String connString =
-                "database = bugTrackerFlynt; server = localhost; user id = root; pwd = D@nkm3m3s; Port = 6000";
+                "database =; server = localhost; user id = root; pwd =; Port =";
             MySqlConnection con = new MySqlConnection(connString);
             con.Open();
             return con;
@@ -117,12 +117,17 @@ namespace Bug_Tracker_Project.Scripts
                 sqlRd = cmd.ExecuteReader();
             }
             catch (MySqlException err) { 
-                Console.Write(err);
+                int errNum = err.HResult;
+                Console.Write(err.Code);
+                string errLink =err.HelpLink;
+
                 sqlRd = null;
             }
-            finally { DisconectFromDb(con); }
+            finally { 
+                //DisconectFromDb(con);
+                }
 
-            _ = Console.Read();
+            //_ = Console.Read();
 
             return sqlRd;
         }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text.RegularExpressions;
-
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace Bug_Tracker_Project.Scripts
 {
@@ -25,6 +26,10 @@ namespace Bug_Tracker_Project.Scripts
             if (passIsValid) results += Environment.NewLine + "Password is valid";
             else results += Environment.NewLine + "Password is invalid";
 
+            string success;
+            //if (RegisterUser(email, password).Result)
+              //  success = "successful user register";
+
             return results;
         }
 
@@ -45,7 +50,18 @@ namespace Bug_Tracker_Project.Scripts
             return isValidated;
         }
 
-        // TODO: Register to database
-        private static async void RegisterUser() { }
+        public static async Task<bool> RegisterUser(string email, string password, int userType, string firstName, string lastName)
+        {
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                return false;
+            bool result = false;
+ 
+            string query = "INSERT INTO users (username, password, FirstName, LastName, UserType)" +
+                $"VALUES('{email}' , '{password}', '{firstName}', '{lastName}', {userType} ) ;";
+
+             result = await Operator.ExecuteDbQuery(query);
+
+            return result;
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 public enum Status { Active, Resolved, PendingReview, Closed }
 namespace Bug_Tracker_Project.Models
 {
-    public class Task
+    public class TaskModel
     {
         public string Title { get; set; }
 
@@ -23,14 +23,14 @@ namespace Bug_Tracker_Project.Models
         // Only for testing
         public string Results { get; }
 
-        public Task(User user)
+        public TaskModel(User user)
         {
             Submitter = user;
             TimeOfCreation = DateTime.Now;
         }
 
-        public Task(string results) => Results = results;
+        public TaskModel(string results) => Results = results;
 
-        public Task() {}
+        public TaskModel() {}
     }
 }

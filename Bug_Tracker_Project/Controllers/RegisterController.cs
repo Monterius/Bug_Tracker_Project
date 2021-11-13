@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using Bug_Tracker_Project.Models;
 using Bug_Tracker_Project.Scripts;
+using System.Threading.Tasks;
+
 
 namespace Bug_Tracker_Project.Controllers
 {
@@ -16,14 +18,18 @@ namespace Bug_Tracker_Project.Controllers
         /// </summary>
         /// <param name="registerModel"></param>
         /// <returns></returns>
-        public ActionResult Index(RegisterModel registerModel=null)
+        public async Task<ActionResult> Index(RegisterModel registerModel = null)
         {
             if (registerModel == null) return View("Register", new RegisterModel());
 
             var results = UserRegistry.Validate(registerModel.Email, registerModel.Password);
+
             var resultsHtml = results.Replace("\n", "<br /><br />");
             var register = new RegisterModel(resultsHtml);
-            return View("Register", register);
+
+            await UserRegistry.RegisterUser(registerModel.Email, registerModel.Password, ((int)registerModel.UserType), registerModel.FirstName, registerModel.LastName);
+            
+            return View("Register", register); // should return to the index rather than the ret
         }
     }
 }
